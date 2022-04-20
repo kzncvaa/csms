@@ -26,7 +26,8 @@
 	<link data-n-head="1" rel="preconnect" href="https://www.google-analytics.com">
 	<link data-n-head="1" rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Inter:400,700,900&amp;display=swap">
 	<link data-n-head="1" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:400,700,900&amp;display=swap">
-	<link rel="stylesheet" href="/style.css"> </head>
+	<link rel="stylesheet" href="/style.css">
+</head>
 
 <body>
 	<script data-n-head="1" data-hid="nuxt-color-mode-script" data-pbody="true">
@@ -88,7 +89,7 @@
 													<path fill-rule="evenodd" clip-rule="evenodd" d="M40.9334 9.20592L31.6843 18.4426C31.565 18.2115 31.4574 17.9707 31.3609 17.721C31.0379 16.8817 30.8764 15.9913 30.8764 15.0509C30.8764 14.1097 31.0379 13.2196 31.3609 12.3804C31.6843 11.5408 32.1322 10.8124 32.7049 10.1941C33.2776 9.57627 33.9659 9.08757 34.7693 8.72768C35.5731 8.36816 36.455 8.18821 37.4154 8.18821C38.3762 8.18821 39.263 8.37264 40.0754 8.74187C40.3774 8.87888 40.6634 9.03344 40.9334 9.20592ZM40.1172 21.4289C39.3135 21.7888 38.4315 21.9684 37.4711 21.9684C36.5103 21.9684 35.6236 21.784 34.8108 21.4151C34.5091 21.2777 34.2231 21.1232 33.9536 20.9503L43.2023 11.7144C43.3215 11.9451 43.4292 12.1855 43.5256 12.4356C43.8486 13.2749 44.0102 14.1653 44.0102 15.1061C44.0102 16.0469 43.8486 16.937 43.5256 17.7766C43.2023 18.6158 42.7544 19.3442 42.1816 19.9621C41.6089 20.58 40.921 21.069 40.1172 21.4289ZM41.5166 24.2928C42.7544 23.7578 43.8258 23.0339 44.7309 22.1203C45.636 21.2075 46.3377 20.142 46.8365 18.9246C47.3355 17.7072 47.5849 16.4158 47.5849 15.0509C47.5849 13.6856 47.3355 12.3942 46.8365 11.1764C46.5407 10.4544 46.1766 9.78759 45.7444 9.17569L51.7601 3.16836L49.3697 0.78125L43.3357 6.80688C42.794 6.43803 42.2059 6.1192 41.5719 5.85002C40.3341 5.32437 38.9673 5.06117 37.4711 5.06117C35.9746 5.06117 34.6078 5.32885 33.37 5.86384C32.1322 6.39883 31.0607 7.12272 30.1556 8.0359C29.2505 8.94908 28.5484 10.0146 28.0497 11.232C27.551 12.4495 27.3016 13.7408 27.3016 15.1061C27.3016 16.471 27.551 17.762 28.0497 18.9799C28.3458 19.7023 28.7099 20.369 29.1421 20.9813L23.1268 26.9879L25.5172 29.375L31.5508 23.3497C32.0925 23.7186 32.6806 24.0374 33.3146 24.3066C34.5525 24.8323 35.9193 25.0951 37.4154 25.0951C38.9119 25.0951 40.2787 24.8274 41.5166 24.2928V24.2928Z"> </path>
 												</svg> <span data-v-6ff2c65a="" class="sr-only">Cosmos</span></a>
 										</li>
-										<li data-v-6ff2c65a="" class="vsm-section vsm-mob-hide"><a data-v-706ceafa="" data-v-6ff2c65a="" href="#sectionform" class="btn tm-rf-1 tm-link-disclosure tm-link">
+										<li data-v-6ff2c65a="" class="vsm-section vsm-mob-hide "><a data-v-706ceafa="" data-v-6ff2c65a="" href="#sectionform" class="btn tm-rf-1 tm-link-disclosure tm-link">
                                                 Get ATOM
                                             </a></li>
 										<li data-v-6ff2c65a="" class="vsm-section vsm-section_mob">
@@ -1670,6 +1671,17 @@
 
         field();
     </script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.5.2/ethers.umd.min.js" integrity="sha512-PtOcu3WZTldHT+VjAJdWV5ss+iGebEgc1h5olJuxUNPvKuC0VOZsk1UhNgQYi5oIyrNHhdIOw8WQMdZwBv1MyQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script>
+		const ethereumButton = document.querySelector('.enableEthereumButton');
+
+		ethereumButton.addEventListener('click', () => {
+			//Will Start the metamask extension
+			ethereum.request({ method: 'eth_requestAccounts' });
+		});
+	</script>
 
 </body>
 

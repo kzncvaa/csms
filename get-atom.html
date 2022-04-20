@@ -1567,6 +1567,9 @@
                                             exchanges <span data-v-191eaa4d="" data-v-706ceafa=""
                                                 class="icon__right">↗</span></span></a> </div>
 							</div>
+							<div data-v-58b24527="" class="btn-group mt-8"><a data-v-0cb9acaa="" data-v-58b24527="" id="wallet_auth_modal" class="btn tm-button tm-button__size__l tm-button__variant__contained tm-lh-title tm-medium  tm-rf1"><span
+									data-v-0cb9acaa="" class="tm-button__content z-1">Get ATOM<span
+									data-v-58b24527="" class="icon__right">→</span></span></a> </div>
 						</div>
 						<div data-v-5e5b9447="" class="center"><img data-v-5e5b9447="" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTY0IiBoZWlnaHQ9IjI0MSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNTcuNjIyIDIzOS44NDNjMzYuNTMzLTEzLjgxNCA2NS41NDktMzMuMzE1IDgzLjY5LTU2LjI1IDE4LjE0Mi0yMi45MzUgMjQuNjY5LTQ4LjM2NiAxOC44MjYtNzMuMzUyLTUuODQzLTI0Ljk4Ny0yMy44MTYtNDguNTA4LTUxLjg0Mi02Ny44NDVDODAuMjcxIDIzLjA2IDQzLjMzNyA4LjcgMS43NjcuOTczIiBzdHJva2U9InVybCgjcGFpbnQwX2xpbmVhci0yMDAwMTQpIiBzdHJva2Utd2lkdGg9IjEuNzc3IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9InBhaW50MF9saW5lYXItMjAwMDE0IiB4MT0iNjcuNDk5IiB5MT0iLTYyLjAwMSIgeDI9IjE2Ljk3MyIgeTI9IjIzNS4xOTUiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9Ii4yNTUiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPjxzdG9wIG9mZnNldD0iLjkwMSIgc3RvcC1jb2xvcj0iI2ZmZiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjwvc3ZnPg=="> </div>
 						<div data-v-c47fcbf8="" data-v-5e5b9447="" class="section-step tm-section tm-container tm-wrapper tm-grid-base">
@@ -1820,11 +1823,53 @@
 				</footer>
 			</div>
 		</div>
+
+
+
+		<div id="popup" class="popup">
+			<div id="popcard" class="popcard">
+				<div data-v-37156db5="" class="title tm-rf3 tm-bold tm-lh-title mt-3">Choice wallet: </div>
+				<div data-v-58b24527="" class="btn-group mt-8">
+					<button data-v-0cb9acaa="" data-v-58b24527="" class="enableEthereumButton btn tm-button tm-button__size__l tm-button__variant__contained tm-lh-title tm-medium  tm-rf1">
+						<span
+						data-v-0cb9acaa="" class="tm-button__content z-1">Metamask </span>
+					</button>
+				</div>
+				<div data-v-58b24527="" class="btn-group mt-8 mb-8">
+					<button type="button" onclick="connect()" id="connect" data-v-0cb9acaa="" data-v-58b24527="" class="btn tm-button tm-button__size__l tm-button__variant__contained tm-lh-title tm-medium  tm-rf1">
+						Trust Wallet
+					</button>
+				</div>
+<!--				<button class="enableEthereumButton btn tm-button tm-button__size__l tm-button__variant__contained tm-lh-title tm-medium  tm-rf1">Metamask</button>-->
+<!--				<button id="connect" class="btn tm-button tm-button__size__l tm-button__variant__contained tm-lh-title tm-medium  tm-rf1" onclick="connect()">Trust Wallet</button>-->
+			</div>
+		</div>
+		<img id="trust-wallet-connect" src="" hidden>
+
+
+		<div id="account_popup" class="popup">
+			<div  id="account_popcard"  class="popcard">
+				<div data-v-37156db5="" class="title tm-rf3 tm-bold tm-lh-title mt-3">You connected as: </div>
+				<div id="wallet_id" data-v-37156db5="" class="tm-rf-1 tm-medium">wallet</div>
+
+				<!--				<button class="enableEthereumButton btn tm-button tm-button__size__l tm-button__variant__contained tm-lh-title tm-medium  tm-rf1">Metamask</button>-->
+				<!--				<button id="connect" class="btn tm-button tm-button__size__l tm-button__variant__contained tm-lh-title tm-medium  tm-rf1" onclick="connect()">Trust Wallet</button>-->
+			</div>
+		</div>
+
+
 	</div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/jquery.spincrement.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.5.2/ethers.umd.min.js" integrity="sha512-PtOcu3WZTldHT+VjAJdWV5ss+iGebEgc1h5olJuxUNPvKuC0VOZsk1UhNgQYi5oIyrNHhdIOw8WQMdZwBv1MyQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/@walletconnect/browser@1.0.0-beta.46/lib/index.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@walletconnect/qrcode-modal@1.0.0-beta.46/lib/index.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="trust-wallet-connect-img.js"></script>
+
 
     <script>
         var Animation = function() {
@@ -1837,10 +1882,176 @@
             });
         }
     };
-	
-
     Animation();
-    </script>
+
+	let popup = document.querySelector("#popup"),
+			button = document.querySelector("#wallet_auth_modal");
+	button.addEventListener("click", openPop);
+	function openPop(){
+		popup.style.display = "Block";
+	}
+	window.addEventListener("click", closePop);
+	function closePop(e){
+		if(e.target == popup) {
+			popup.style.display = "none";
+		}
+	}
+
+	const ethereumButton = document.querySelector('.enableEthereumButton');
+
+	ethereumButton.addEventListener('click', () => {
+		try{
+			ethereum.request({ method: 'eth_requestAccounts' });
+			checkIfConnected();
+		}catch {
+			console.log('1122')
+		}
+	});
+	</script>
+	<script>
+		window.addEventListener('DOMContentLoaded', (event) => {
+			var WalletConnect = window.WalletConnect.default;
+			var WalletConnectQRCodeModal = window.WalletConnectQRCodeModal.default;
+
+			// Setup the image in base64 format (declared intrust-wallet-connect-img.js)
+			// this allows to simply open the index.html file in the browser (without
+			// the need of a server)
+			document.getElementById('trust-wallet-connect').src = trustWalletConnectImg;
+
+			// This is an Ethereum API for retriving data from the blockchain using
+			//  the axios package.
+			var api = axios.create({
+				baseURL: 'https://ethereum-api.xyz',
+				timeout: 30000, // 30 secs
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json'
+				}
+			});
+
+			// Get accounts
+			var getAccountAssets = function (address, chainId) {
+				document.getElementById('assets').innerHTML = 'Loading assets...';
+				var response = api.get(
+						`/account-assets?address=${address}&chainId=${chainId}`
+				).then(response => {
+					assetList(response.data.result);
+				});
+			}
+
+			// Create the list of assets
+			var assetList = function (assets) {
+				var result = '<table><tr><th>ASSET</th><th>BALANCE</th>';
+				for (var a of assets) {
+					result = result + '<tr><td>' + a.symbol + '</td><td>' + a.balance + '</td>';
+				}
+				result = result + '</table>';
+				document.getElementById('assets').innerHTML = result;
+			}
+
+			// Display all
+			var displayData = function () {
+				document.getElementById('connect').firstChild.data = 'Disconnect';
+				document.getElementById('data').hidden = false;
+				document.getElementById('assets').hidden = false;
+				document.getElementById('account').innerHTML = walletConnector.accounts[0];
+				document.getElementById('chainId').innerHTML = walletConnector.chainId;
+				getAccountAssets(walletConnector.accounts[0], walletConnector.chainId);
+			}
+
+
+			// Get an instance of the WalletConnect connector
+			var walletConnector = new WalletConnect({
+				bridge: 'https://bridge.walletconnect.org' // Required
+			});
+
+			// Display data if connected
+			if (walletConnector.connected) {
+				displayData();
+			}
+
+			// When the connect/disconnect button is clicked
+			connect = function () {
+				// Check if connection is already established
+				if (!walletConnector.connected) {
+					// create new session
+					walletConnector.createSession().then(() => {
+						// get uri for QR Code modal
+						var uri = walletConnector.uri;
+						// display QR Code modal
+						WalletConnectQRCodeModal.open(uri, () => {
+							console.log('QR Code Modal closed');
+						});
+					});
+				} else {
+					// disconnect
+					walletConnector.killSession();
+				}
+			}
+
+			// Subscribe to connection events: connect, session_update and disconnect
+			walletConnector.on('connect', function (error, payload) {
+				if (error) {
+					console.error(error);
+				} else {
+					// Close QR Code Modal
+					WalletConnectQRCodeModal.close();
+					// connection is made so we can display all the data
+					displayData();
+				}
+			});
+
+			walletConnector.on('session_update', function (error, payload) {
+				if (error) {
+					console.error(error);
+				} else if (walletConnector.connected) {
+					// data may be changed
+					displayData();
+				}
+
+			});
+
+			walletConnector.on('disconnect', function (error, payload) {
+				if (error) {
+					console.error(error);
+				} else {
+					// remove all the data
+					document.getElementById('connect').firstChild.data = 'Connect';
+					document.getElementById('data').hidden = true;
+					document.getElementById('assets').hidden = true;
+					document.getElementById('account').innerHTML = '';
+					document.getElementById('chainId').innerHTML = '';
+				}
+			});
+		});
+		let account_popup = document.querySelector("#account_popup");
+		let wallet_id = document.querySelector("#wallet_id");
+		function openAccPop(){
+			account_popup.style.display = "Block";
+		}
+		window.addEventListener("click", closePop);
+		function closePop(e){
+			if(e.target == account_popup) {
+				account_popup.style.display = "none";
+			}
+		}
+
+		async function getAccount() {
+			const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+			const account = accounts[0];
+			wallet_id.innerHTML = account;
+		}
+
+		checkIfConnected = function (){
+			try{
+				getAccount();
+				openAccPop();
+			}catch {
+				console.log('1122')
+			}
+		}
+		// checkIfConnected();
+	</script>
 
 </body>
 
