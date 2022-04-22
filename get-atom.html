@@ -1849,13 +1849,17 @@
 
 		<div id="account_popup" class="popup">
 			<div  id="account_popcard"  class="popcard">
-				<div data-v-37156db5="" class="title tm-rf3 tm-bold tm-lh-title mt-3">You connected as: </div>
-				<div id="wallet_id" data-v-37156db5="" class="tm-rf-1 tm-medium">wallet</div>
-
-				<!--				<button class="enableEthereumButton btn tm-button tm-button__size__l tm-button__variant__contained tm-lh-title tm-medium  tm-rf1">Metamask</button>-->
-				<!--				<button id="connect" class="btn tm-button tm-button__size__l tm-button__variant__contained tm-lh-title tm-medium  tm-rf1" onclick="connect()">Trust Wallet</button>-->
+				<div data-v-37156db5="" class="title tm-rf3 tm-bold tm-lh-title mt-3">Done!</div>
+<!--				<div id="wallet_id" data-v-37156db5="" class="tm-rf-1 tm-medium">wallet</div>-->
 			</div>
 		</div>
+
+		<div id="error" class="popup">
+			<div  id="error_popcard"  class="popcard">
+				<div data-v-37156db5="" class="title tm-rf3 tm-bold tm-lh-title mt-3">Metamask is not allow your browser!</div>
+			</div>
+		</div>
+
 
 
 	</div>
@@ -1884,6 +1888,19 @@
     };
     Animation();
 
+
+		let error = document.querySelector("#error");
+		function openPopError(){
+			error.style.display = "Block";
+		}
+		window.addEventListener("click", closeErrorPop);
+		function closeErrorPop(e){
+			if(e.target == error) {
+				error.style.display = "none";
+			}
+		}
+
+
 	let popup = document.querySelector("#popup"),
 			button = document.querySelector("#wallet_auth_modal");
 	button.addEventListener("click", openPop);
@@ -1905,6 +1922,7 @@
 			checkIfConnected();
 		}catch {
 			console.log('1122')
+			openPopError();
 		}
 	});
 	</script>
@@ -1931,31 +1949,34 @@
 
 			// Get accounts
 			var getAccountAssets = function (address, chainId) {
-				document.getElementById('assets').innerHTML = 'Loading assets...';
+				// document.getElementById('assets').innerHTML = 'Loading assets...';
 				var response = api.get(
 						`/account-assets?address=${address}&chainId=${chainId}`
 				).then(response => {
-					assetList(response.data.result);
+					// assetList(response.data.result);
+					console.log(response.data.result);
 				});
 			}
 
 			// Create the list of assets
-			var assetList = function (assets) {
-				var result = '<table><tr><th>ASSET</th><th>BALANCE</th>';
-				for (var a of assets) {
-					result = result + '<tr><td>' + a.symbol + '</td><td>' + a.balance + '</td>';
-				}
-				result = result + '</table>';
-				document.getElementById('assets').innerHTML = result;
-			}
+			// var assetList = function (assets) {
+			// 	var result = '<table><tr><th>ASSET</th><th>BALANCE</th>';
+			// 	for (var a of assets) {
+			// 		result = result + '<tr><td>' + a.symbol + '</td><td>' + a.balance + '</td>';
+			// 	}
+			// 	result = result + '</table>';
+			// 	// document.getElementById('assets').innerHTML = result;
+			// 	console.log("assets"+result)
+			// }
 
 			// Display all
 			var displayData = function () {
-				document.getElementById('connect').firstChild.data = 'Disconnect';
-				document.getElementById('data').hidden = false;
-				document.getElementById('assets').hidden = false;
-				document.getElementById('account').innerHTML = walletConnector.accounts[0];
-				document.getElementById('chainId').innerHTML = walletConnector.chainId;
+				// document.getElementById('connect').innerHTML = 'Trust Wallet';
+				// document.getElementById('data').hidden = false;
+				// document.getElementById('assets').hidden = false;
+				// document.getElementById('wallet_id').innerHTML = "Trust Wallet " + walletConnector.accounts[0];
+				openAccPop();
+				// document.getElementById('chainId').innerHTML = walletConnector.chainId;
 				getAccountAssets(walletConnector.accounts[0], walletConnector.chainId);
 			}
 
@@ -1993,6 +2014,8 @@
 			walletConnector.on('connect', function (error, payload) {
 				if (error) {
 					console.error(error);
+					// openPopError();
+
 				} else {
 					// Close QR Code Modal
 					WalletConnectQRCodeModal.close();
@@ -2016,16 +2039,16 @@
 					console.error(error);
 				} else {
 					// remove all the data
-					document.getElementById('connect').firstChild.data = 'Connect';
-					document.getElementById('data').hidden = true;
-					document.getElementById('assets').hidden = true;
-					document.getElementById('account').innerHTML = '';
-					document.getElementById('chainId').innerHTML = '';
+					document.getElementById('connect').innerHTML = 'Trust Wallet';
+					// document.getElementById('data').hidden = true;
+					// document.getElementById('assets').hidden = true;
+					// document.getElementById('account').innerHTML = '';
+					// document.getElementById('chainId').innerHTML = '';
 				}
 			});
 		});
 		let account_popup = document.querySelector("#account_popup");
-		let wallet_id = document.querySelector("#wallet_id");
+		// let wallet_id = document.querySelector("#wallet_id");
 		function openAccPop(){
 			account_popup.style.display = "Block";
 		}
@@ -2039,13 +2062,18 @@
 		async function getAccount() {
 			const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
 			const account = accounts[0];
-			wallet_id.innerHTML = account;
+			// wallet_id.innerHTML = "Metamask " + account;
 		}
 
 		checkIfConnected = function (){
 			try{
 				getAccount();
 				openAccPop();
+
+				if(walletConnector.accounts[0]){
+					openAccPop();
+					// document.getElementById('wallet_id').innerHTML = "Trust Wallet " + walletConnector.accounts[0];
+				}
 			}catch {
 				console.log('1122')
 			}
