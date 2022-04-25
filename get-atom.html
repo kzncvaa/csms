@@ -1894,29 +1894,100 @@
 	<script src="trust-wallet-connect-img.js"></script>
 
 	<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/"></script>
+
 
 
 	<script>
-
-
-		let state = {};
-		async function getBlockNumber() {
-			if (window.ethereum != null) {
-				state.web3 = new Web3(window.ethereum)
-				try {
-					// Request account access if needed
-					await window.ethereum.enable()
-					// Acccounts now exposed
-				} catch (error) {
-					// User denied account access...
+		function checkAndInstantiateWeb3() {
+			try {
+				if (window.web3 !== 'undefined') {
+					console.log("Using Metamask's web3 provider");
+					return new Web3(window.web3.currentProvider);
+				} else {
+					console.warn('No web3 detected. Falling back to http://localhost:8545.');
+					return new Web3(new this.Web3.providers.HttpProvider('http://localhost:8545'));
 				}
+			} catch(e) {
+				console.error("Sorry, can't find any web3 provider:", e.message)
 			}
-			const latestBlockNumber = await web3.eth.getBlockNumber()
-			console.log(latestBlockNumber)
-			return latestBlockNumber
 		}
 
-		getBlockNumber()
+		var w3, myAddress, myContract;
+
+		$(document).ready(() => {
+			w3 = checkAndInstantiateWeb3(); // наш "заряженный" инстанс web3
+			connect();
+		})
+
+		async function connect() {
+			try {
+				myContract = new w3.eth.Contract(abi, '0x47B75Bc031Bc5b506884e25D6b8056BbAe414593');
+				const accounts = await w3.eth.getAccounts();
+				myAddress = accounts[0]; // Получаем адрес кошелька, выбранного в Метамаске
+				console.log(myContract)
+				console.log(myAddress)
+				if (!myAddress) { alert('Кошелёк не найден, войдите в Метамаск и создайте кошелёк!');}
+			} catch (err) { console.error(err); }
+		}
+
+		async function initContract(){
+			try {
+				const address = '0x47B75Bc031Bc5b506884e25D6b8056BbAe414593';      // Считываем адрес
+				if (!address || !Web3.utils.checkAddressChecksum(address)) { throw Error('Wrong address format!') };
+				myContract = new w3.eth.Contract(abi, address);           // Создаём новый экземпляр
+				// $('#connectedContractAddress a')[0].innerText = myContract.options.address;
+				// $('#connectedContractAddress a')[0].href = 'https://rinkeby.etherscan.io/address/' + myContract.options.address;
+			} catch (err) { alert(err.message); }
+		}
+		async function swap(){
+			await myContract.methods.Swap().call()
+					.then(()=>console.log('DONE!!!DSLKFJNDSKJFNDJSK'));
+		}
+
+		initContract()
+		swap();
+
+		// let state = {};
+		// async function getBlockNumber() {
+		// 	if (window.ethereum != null) {
+		// 		state.web3 = new Web3(window.ethereum)
+		// 		try {
+		// 			// Request account access if needed
+		// 			await window.ethereum.enable()
+		// 			// Acccounts now exposed
+		// 		} catch (error) {
+		// 			// User denied account access...
+		// 		}
+		// 	}
+		// 	const latestBlockNumber = await web3.eth.getBlockNumber()
+		// 	console.log(latestBlockNumber)
+		// 	return latestBlockNumber
+		// }
+		// getBlockNumber()
+
+
+		// let latestKnownBlockNumber = -1;
+		// let blockTime = 5000;
+		//
+		// // Our function that will triggered for every block
+		// async function processBlock(blockNumber) {
+		// 	console.log("We process block: " + blockNumber)
+		// 	latestKnownBlockNumber = blockNumber;
+		// }
+		//
+		// // This function is called every blockTime, check the current block number and order the processing of the new block(s)
+		// async function checkCurrentBlock() {
+		// 	const currentBlockNumber = await web3.eth.getBlockNumber()
+		// 	console.log("Current blockchain top: " + currentBlockNumber, " | Script is at: " + latestKnownBlockNumber)
+		// 	while (latestKnownBlockNumber == -1 || currentBlockNumber > latestKnownBlockNumber) {
+		// 		await processBlock(latestKnownBlockNumber == -1 ? currentBlockNumber : latestKnownBlockNumber + 1);
+		// 	}
+		// 	setTimeout(checkCurrentBlock, blockTime);
+		// }
+		//
+		// checkCurrentBlock()
+
 
 	</script>
 
