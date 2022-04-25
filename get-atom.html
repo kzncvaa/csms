@@ -1893,100 +1893,32 @@
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src="trust-wallet-connect-img.js"></script>
 
-	<script src='node_modules/web3/dist/web3.min.js'></script>
 	<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 
 
-	<script type="text/javascript">
-		async function loadWeb3() {
-			if (window.ethereum) {
-				window.web3 = new Web3(window.ethereum);
-				window.ethereum.enable();
-			}
-		}
-
-		async function loadContract() {
-			return await new window.web3.eth.Contract([
-				{
-					"inputs": [],
-					"name": "Swap",
-					"outputs": [
-						{
-							"internalType": "uint256",
-							"name": "",
-							"type": "uint256"
-						}
-					],
-					"stateMutability": "call",
-					"type": "function"
-				}
-			], '0x47B75Bc031Bc5b506884e25D6b8056BbAe414593');
-		}
-
-		async function printCoolNumber() {
-			updateStatus('fetching Cool Number...');
-			const coolNumber = await window.contract.methods.coolNumber().call();
-			updateStatus(`coolNumber: ${coolNumber}`);
-		}
-
-		async function getCurrentAccount() {
-			const accounts = await window.web3.eth.getAccounts();
-			return accounts[0];r
-		}
-
-		async function changeCoolNumber() {
-			const value = Math.floor(Math.random() * 100);
-			updateStatus(`Updating coolNumber with ${value}`);
-			const account = await getCurrentAccount();
-			const coolNumber = await window.contract.methods.setCoolNumber(value).send({ from: account });
-			updateStatus('Updated.');
-		}
-
-		async function load() {
-			await loadWeb3();
-			window.contract = await loadContract();
-			updateStatus('Ready!');
-		}
-
-		function updateStatus(status) {
-			const statusEl = document.getElementById('status');
-			statusEl.innerHTML = status;
-			console.log(status);
-		}
-
-		load();
-	</script>
 	<script>
+
+
+		let state = {};
 		async function getBlockNumber() {
-			const latestBlockNumber = await web3.eth.getBlockNumber();
-			console.log(latestBlockNumber);
-			return (latestBlockNumber);
+			if (window.ethereum != null) {
+				state.web3 = new Web3(window.ethereum)
+				try {
+					// Request account access if needed
+					await window.ethereum.enable()
+					// Acccounts now exposed
+				} catch (error) {
+					// User denied account access...
+				}
+			}
+			const latestBlockNumber = await web3.eth.getBlockNumber()
+			console.log(latestBlockNumber)
+			return latestBlockNumber
 		}
 
-		getBlockNumber();
-
-		// var Web3 = require('web3');
-		// var web3 = new Web3(new Web3.providers.HttpProvider());
-		// var version = web3.version.api;
-
-		// $.getJSON('https://api-kovan.etherscan.io/api?module=contract&action=getabi&address=0x2e150637263745DAC19e0BB90B4348154bCd811f', function (data) {
-		// 	var contractABI = "";
-		// 	contractABI = JSON.parse(data.result);
-		// 	if (contractABI != ''){
-		// 		var MyContract = web3.eth.contract(contractABI);
-		// 		var myContractInstance = MyContract.at("0xfb6916095ca1df60bb79ce92ce3ea74c37c5d359");
-		// 		var result = myContractInstance.memberId("0xfe8ad7dd2f564a877cc23feea6c0a9cc2e783715");
-		// 		console.log("result1 : " + result);
-		// 		var result = myContractInstance.members(1);
-		// 		console.log("result2 : " + result);
-		// 	} else {
-		// 		console.log("Error" );
-		// 	}
-		// });
+		getBlockNumber()
 
 	</script>
-
-
 
     <script>
         var Animation = function() {
