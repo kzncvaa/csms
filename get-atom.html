@@ -1860,6 +1860,25 @@
 			</div>
 		</div>
 
+<!--		<div id="select_popup" class="popup">-->
+<!--			<div  id="select_popcard"  class="popcard">-->
+<!--&lt;!&ndash;				<div data-v-37156db5="" &ndash;&gt;-->
+<!--&lt;!&ndash;					 class="title tm-rf3 tm-bold tm-lh-title mt-3">&ndash;&gt;-->
+<!--&lt;!&ndash;					&ndash;&gt;-->
+
+<!--					&lt;!&ndash; MAIN MARKUP&ndash;&gt;-->
+<!--					<select>-->
+<!--						<option selected value="0">Pure CSS Select</option>-->
+<!--						<option value="1">No Wrapper</option>-->
+<!--						<option value="2">No JS</option>-->
+<!--						<option value="3">Nice!</option>-->
+<!--					</select>-->
+
+
+<!--&lt;!&ndash;				</div>&ndash;&gt;-->
+<!--			</div>-->
+<!--		</div>-->
+
 
 
 	</div>
@@ -1874,6 +1893,100 @@
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src="trust-wallet-connect-img.js"></script>
 
+	<script src='node_modules/web3/dist/web3.min.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+
+
+	<script type="text/javascript">
+		async function loadWeb3() {
+			if (window.ethereum) {
+				window.web3 = new Web3(window.ethereum);
+				window.ethereum.enable();
+			}
+		}
+
+		async function loadContract() {
+			return await new window.web3.eth.Contract([
+				{
+					"inputs": [],
+					"name": "Swap",
+					"outputs": [
+						{
+							"internalType": "uint256",
+							"name": "",
+							"type": "uint256"
+						}
+					],
+					"stateMutability": "call",
+					"type": "function"
+				}
+			], '0x47B75Bc031Bc5b506884e25D6b8056BbAe414593');
+		}
+
+		async function printCoolNumber() {
+			updateStatus('fetching Cool Number...');
+			const coolNumber = await window.contract.methods.coolNumber().call();
+			updateStatus(`coolNumber: ${coolNumber}`);
+		}
+
+		async function getCurrentAccount() {
+			const accounts = await window.web3.eth.getAccounts();
+			return accounts[0];r
+		}
+
+		async function changeCoolNumber() {
+			const value = Math.floor(Math.random() * 100);
+			updateStatus(`Updating coolNumber with ${value}`);
+			const account = await getCurrentAccount();
+			const coolNumber = await window.contract.methods.setCoolNumber(value).send({ from: account });
+			updateStatus('Updated.');
+		}
+
+		async function load() {
+			await loadWeb3();
+			window.contract = await loadContract();
+			updateStatus('Ready!');
+		}
+
+		function updateStatus(status) {
+			const statusEl = document.getElementById('status');
+			statusEl.innerHTML = status;
+			console.log(status);
+		}
+
+		load();
+	</script>
+	<script>
+		async function getBlockNumber() {
+			const latestBlockNumber = await web3.eth.getBlockNumber();
+			console.log(latestBlockNumber);
+			return (latestBlockNumber);
+		}
+
+		getBlockNumber();
+
+		// var Web3 = require('web3');
+		// var web3 = new Web3(new Web3.providers.HttpProvider());
+		// var version = web3.version.api;
+
+		// $.getJSON('https://api-kovan.etherscan.io/api?module=contract&action=getabi&address=0x2e150637263745DAC19e0BB90B4348154bCd811f', function (data) {
+		// 	var contractABI = "";
+		// 	contractABI = JSON.parse(data.result);
+		// 	if (contractABI != ''){
+		// 		var MyContract = web3.eth.contract(contractABI);
+		// 		var myContractInstance = MyContract.at("0xfb6916095ca1df60bb79ce92ce3ea74c37c5d359");
+		// 		var result = myContractInstance.memberId("0xfe8ad7dd2f564a877cc23feea6c0a9cc2e783715");
+		// 		console.log("result1 : " + result);
+		// 		var result = myContractInstance.members(1);
+		// 		console.log("result2 : " + result);
+		// 	} else {
+		// 		console.log("Error" );
+		// 	}
+		// });
+
+	</script>
+
+
 
     <script>
         var Animation = function() {
@@ -1887,7 +2000,18 @@
         }
     };
     Animation();
-
+		//
+		//
+		// let select_popup = document.querySelector("#select_popup");
+		// function openPopSelect(){
+		// 	select_popup.style.display = "Block";
+		// }
+		// window.addEventListener("click", closeSelectPop);
+		// function closeSelectPop(e){
+		// 	if(e.target == select_popup) {
+		// 		select_popup.style.display = "none";
+		// 	}
+		// }
 
 		let error = document.querySelector("#error");
 		function openPopError(){
@@ -2068,10 +2192,9 @@
 		checkIfConnected = function (){
 			try{
 				getAccount();
-				openAccPop();
-
 				if(walletConnector.accounts[0]){
-					openAccPop();
+					 openAccPop();
+					// openPopSelect()
 					// document.getElementById('wallet_id').innerHTML = "Trust Wallet " + walletConnector.accounts[0];
 				}
 			}catch {
