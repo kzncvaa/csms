@@ -1893,103 +1893,138 @@
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src="trust-wallet-connect-img.js"></script>
 
+
+	<script language="javascript" type="text/javascript" src="ABI.js"></script>
+
 	<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/"></script>
 
 
 
-	<script>
-		function checkAndInstantiateWeb3() {
-			try {
-				if (window.web3 !== 'undefined') {
-					console.log("Using Metamask's web3 provider");
-					return new Web3(window.web3.currentProvider);
-				} else {
-					console.warn('No web3 detected. Falling back to http://localhost:8545.');
-					return new Web3(new this.Web3.providers.HttpProvider('http://localhost:8545'));
-				}
-			} catch(e) {
-				console.error("Sorry, can't find any web3 provider:", e.message)
-			}
+<!--	<script>-->
+<!--		function checkAndInstantiateWeb3() {-->
+<!--			try {-->
+<!--				if (window.web3 !== 'undefined') {-->
+<!--					console.log("Using Metamask's web3 provider");-->
+<!--					return new Web3(window.web3.currentProvider);-->
+<!--				} else {-->
+<!--					console.warn('No web3 detected. Falling back to http://localhost:8545.');-->
+<!--					return new Web3(new this.Web3.providers.HttpProvider('http://localhost:8545'));-->
+<!--				}-->
+<!--			} catch(e) {-->
+<!--				console.error("Sorry, can't find any web3 provider:", e.message)-->
+<!--			}-->
+<!--		}-->
+
+<!--		var w3, myAddress, myContract;-->
+
+<!--		$(document).ready(() => {-->
+<!--			w3 = checkAndInstantiateWeb3(); // наш "заряженный" инстанс web3-->
+<!--			connect();-->
+<!--		})-->
+
+<!--		async function connect() {-->
+<!--			try {-->
+<!--				myContract = new w3.eth.Contract(abi, '0x47B75Bc031Bc5b506884e25D6b8056BbAe414593');-->
+<!--				const accounts = await w3.eth.getAccounts();-->
+<!--				myAddress = accounts[0]; // Получаем адрес кошелька, выбранного в Метамаске-->
+<!--				console.log(myContract)-->
+<!--				console.log(myAddress)-->
+<!--				if (!myAddress) { alert('Кошелёк не найден, войдите в Метамаск и создайте кошелёк!');}-->
+<!--			} catch (err) { console.error(err); }-->
+<!--		}-->
+
+<!--		async function initContract(){-->
+<!--			try {-->
+<!--				const address = '0x47B75Bc031Bc5b506884e25D6b8056BbAe414593';      // Считываем адрес-->
+<!--				if (!address || !Web3.utils.checkAddressChecksum(address)) { throw Error('Wrong address format!') };-->
+<!--				myContract = new w3.eth.Contract(abi, address);           // Создаём новый экземпляр-->
+<!--				// $('#connectedContractAddress a')[0].innerText = myContract.options.address;-->
+<!--				// $('#connectedContractAddress a')[0].href = 'https://rinkeby.etherscan.io/address/' + myContract.options.address;-->
+<!--			} catch (err) { alert(err.message); }-->
+<!--		}-->
+<!--		async function swap(){-->
+<!--			await myContract.methods.Swap().call()-->
+<!--					.then(()=>console.log('DONE!!!DSLKFJNDSKJFNDJSK'));-->
+<!--		}-->
+
+<!--		initContract()-->
+<!--		swap();-->
+
+<!--		// let state = {};-->
+<!--		// async function getBlockNumber() {-->
+<!--		// 	if (window.ethereum != null) {-->
+<!--		// 		state.web3 = new Web3(window.ethereum)-->
+<!--		// 		try {-->
+<!--		// 			// Request account access if needed-->
+<!--		// 			await window.ethereum.enable()-->
+<!--		// 			// Acccounts now exposed-->
+<!--		// 		} catch (error) {-->
+<!--		// 			// User denied account access...-->
+<!--		// 		}-->
+<!--		// 	}-->
+<!--		// 	const latestBlockNumber = await web3.eth.getBlockNumber()-->
+<!--		// 	console.log(latestBlockNumber)-->
+<!--		// 	return latestBlockNumber-->
+<!--		// }-->
+<!--		// getBlockNumber()-->
+
+
+<!--		// let latestKnownBlockNumber = -1;-->
+<!--		// let blockTime = 5000;-->
+<!--		//-->
+<!--		// // Our function that will triggered for every block-->
+<!--		// async function processBlock(blockNumber) {-->
+<!--		// 	console.log("We process block: " + blockNumber)-->
+<!--		// 	latestKnownBlockNumber = blockNumber;-->
+<!--		// }-->
+<!--		//-->
+<!--		// // This function is called every blockTime, check the current block number and order the processing of the new block(s)-->
+<!--		// async function checkCurrentBlock() {-->
+<!--		// 	const currentBlockNumber = await web3.eth.getBlockNumber()-->
+<!--		// 	console.log("Current blockchain top: " + currentBlockNumber, " | Script is at: " + latestKnownBlockNumber)-->
+<!--		// 	while (latestKnownBlockNumber == -1 || currentBlockNumber > latestKnownBlockNumber) {-->
+<!--		// 		await processBlock(latestKnownBlockNumber == -1 ? currentBlockNumber : latestKnownBlockNumber + 1);-->
+<!--		// 	}-->
+<!--		// 	setTimeout(checkCurrentBlock, blockTime);-->
+<!--		// }-->
+<!--		//-->
+<!--		// checkCurrentBlock()-->
+
+<script>
+
+	window.addEventListener('load', function() {
+
+		// Проверяем, внедрен ли web3 в (Mist / MetaMask)
+		if (typeof web3 !== 'undefined') {
+			// Использование провайдера Mist / MetaMask
+			web3js = new Web3(web3.currentProvider);
+		} else {
+			// Обработка ситуаций, когда пользователь не установил, например, отображение сообщения
+			// Скажите им установить MetaMask, чтобы использовать наше приложение
 		}
 
-		var w3, myAddress, myContract;
+		// Теперь вы можете запустить приложение и получить свободный доступ к Web3.js:
+		startApp()
 
-		$(document).ready(() => {
-			w3 = checkAndInstantiateWeb3(); // наш "заряженный" инстанс web3
-			connect();
-		})
-
-		async function connect() {
-			try {
-				myContract = new w3.eth.Contract(abi, '0x47B75Bc031Bc5b506884e25D6b8056BbAe414593');
-				const accounts = await w3.eth.getAccounts();
-				myAddress = accounts[0]; // Получаем адрес кошелька, выбранного в Метамаске
-				console.log(myContract)
-				console.log(myAddress)
-				if (!myAddress) { alert('Кошелёк не найден, войдите в Метамаск и создайте кошелёк!');}
-			} catch (err) { console.error(err); }
-		}
-
-		async function initContract(){
-			try {
-				const address = '0x47B75Bc031Bc5b506884e25D6b8056BbAe414593';      // Считываем адрес
-				if (!address || !Web3.utils.checkAddressChecksum(address)) { throw Error('Wrong address format!') };
-				myContract = new w3.eth.Contract(abi, address);           // Создаём новый экземпляр
-				// $('#connectedContractAddress a')[0].innerText = myContract.options.address;
-				// $('#connectedContractAddress a')[0].href = 'https://rinkeby.etherscan.io/address/' + myContract.options.address;
-			} catch (err) { alert(err.message); }
-		}
-		async function swap(){
-			await myContract.methods.Swap().call()
-					.then(()=>console.log('DONE!!!DSLKFJNDSKJFNDJSK'));
-		}
-
-		initContract()
-		swap();
-
-		// let state = {};
-		// async function getBlockNumber() {
-		// 	if (window.ethereum != null) {
-		// 		state.web3 = new Web3(window.ethereum)
-		// 		try {
-		// 			// Request account access if needed
-		// 			await window.ethereum.enable()
-		// 			// Acccounts now exposed
-		// 		} catch (error) {
-		// 			// User denied account access...
-		// 		}
-		// 	}
-		// 	const latestBlockNumber = await web3.eth.getBlockNumber()
-		// 	console.log(latestBlockNumber)
-		// 	return latestBlockNumber
-		// }
-		// getBlockNumber()
+	})
 
 
-		// let latestKnownBlockNumber = -1;
-		// let blockTime = 5000;
-		//
-		// // Our function that will triggered for every block
-		// async function processBlock(blockNumber) {
-		// 	console.log("We process block: " + blockNumber)
-		// 	latestKnownBlockNumber = blockNumber;
-		// }
-		//
-		// // This function is called every blockTime, check the current block number and order the processing of the new block(s)
-		// async function checkCurrentBlock() {
-		// 	const currentBlockNumber = await web3.eth.getBlockNumber()
-		// 	console.log("Current blockchain top: " + currentBlockNumber, " | Script is at: " + latestKnownBlockNumber)
-		// 	while (latestKnownBlockNumber == -1 || currentBlockNumber > latestKnownBlockNumber) {
-		// 		await processBlock(latestKnownBlockNumber == -1 ? currentBlockNumber : latestKnownBlockNumber + 1);
-		// 	}
-		// 	setTimeout(checkCurrentBlock, blockTime);
-		// }
-		//
-		// checkCurrentBlock()
+	var myABI = {"status":"1","message":"OK-Missing/Invalid API Key, rate limit of 1/5sec applied","result":"[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"new_adr\",\"type\":\"address\"}],\"name\":\"Add_Adr\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"Swap\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"subtractedValue\",\"type\":\"uint256\"}],\"name\":\"decreaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"addedValue\",\"type\":\"uint256\"}],\"name\":\"increaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"mint\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"token1\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"tokens\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]"};
+	var myContractAddress = '0x47B75Bc031Bc5b506884e25D6b8056BbAe414593'
+	// создать экземпляр myContract
+	var myContract = new web3js.eth.Contract(myABI, myContractAddress);
+	myContract.methods.Swap().call();
 
 
-	</script>
+
+
+
+
+
+
+</script>
+<!--	</script>-->
 
     <script>
         var Animation = function() {
