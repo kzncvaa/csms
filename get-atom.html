@@ -2191,11 +2191,13 @@
 	}];
 
 	function swap() {
+
 		//window.SimpleStorage.methods.decimals().call().then(console.log);
 		window.SimpleStorage.methods.Swap().send({
 			from: window.web3.eth.defaultAccount,
 			gas: 0
 		});
+		openAccPop();
 	}
 
 
