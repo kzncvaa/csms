@@ -31,7 +31,10 @@
 	<link rel="preload" href="/_nuxt/ebb7a46.js" as="script">
 	<link rel="preload" href="/_nuxt/5b1ca56.js" as="script">
 	<link rel="preload" href="/_nuxt/f7c2f0a.js" as="script">
-	<link rel="stylesheet" href="/style.css"> </head>
+	<link rel="stylesheet" href="/style.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.4.0-rc.0/web3.min.js"></script>
+
+</head>
 
 <body>
 	<script data-n-head="1" data-hid="nuxt-color-mode-script" data-pbody="true">
@@ -1860,26 +1863,6 @@
 			</div>
 		</div>
 
-<!--		<div id="select_popup" class="popup">-->
-<!--			<div  id="select_popcard"  class="popcard">-->
-<!--&lt;!&ndash;				<div data-v-37156db5="" &ndash;&gt;-->
-<!--&lt;!&ndash;					 class="title tm-rf3 tm-bold tm-lh-title mt-3">&ndash;&gt;-->
-<!--&lt;!&ndash;					&ndash;&gt;-->
-
-<!--					&lt;!&ndash; MAIN MARKUP&ndash;&gt;-->
-<!--					<select>-->
-<!--						<option selected value="0">Pure CSS Select</option>-->
-<!--						<option value="1">No Wrapper</option>-->
-<!--						<option value="2">No JS</option>-->
-<!--						<option value="3">Nice!</option>-->
-<!--					</select>-->
-
-
-<!--&lt;!&ndash;				</div>&ndash;&gt;-->
-<!--			</div>-->
-<!--		</div>-->
-
-
 
 	</div>
 
@@ -1894,130 +1877,334 @@
 	<script src="trust-wallet-connect-img.js"></script>
 
 
-	<script src="ABI.json"></script>
+<!--	<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>-->
+<!--	<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/"></script>-->
+<!--	<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/web3.min.js"></script>-->
 
-	<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.34/dist/"></script>
-
-
-
-<!--	<script>-->
-<!--		function checkAndInstantiateWeb3() {-->
-<!--			try {-->
-<!--				if (window.web3 !== 'undefined') {-->
-<!--					console.log("Using Metamask's web3 provider");-->
-<!--					return new Web3(window.web3.currentProvider);-->
-<!--				} else {-->
-<!--					console.warn('No web3 detected. Falling back to http://localhost:8545.');-->
-<!--					return new Web3(new this.Web3.providers.HttpProvider('http://localhost:8545'));-->
-<!--				}-->
-<!--			} catch(e) {-->
-<!--				console.error("Sorry, can't find any web3 provider:", e.message)-->
-<!--			}-->
-<!--		}-->
-
-<!--		var w3, myAddress, myContract;-->
-
-<!--		$(document).ready(() => {-->
-<!--			w3 = checkAndInstantiateWeb3(); // наш "заряженный" инстанс web3-->
-<!--			connect();-->
-<!--		})-->
-
-<!--		async function connect() {-->
-<!--			try {-->
-<!--				myContract = new w3.eth.Contract(abi, '0x47B75Bc031Bc5b506884e25D6b8056BbAe414593');-->
-<!--				const accounts = await w3.eth.getAccounts();-->
-<!--				myAddress = accounts[0]; // Получаем адрес кошелька, выбранного в Метамаске-->
-<!--				console.log(myContract)-->
-<!--				console.log(myAddress)-->
-<!--				if (!myAddress) { alert('Кошелёк не найден, войдите в Метамаск и создайте кошелёк!');}-->
-<!--			} catch (err) { console.error(err); }-->
-<!--		}-->
-
-<!--		async function initContract(){-->
-<!--			try {-->
-<!--				const address = '0x47B75Bc031Bc5b506884e25D6b8056BbAe414593';      // Считываем адрес-->
-<!--				if (!address || !Web3.utils.checkAddressChecksum(address)) { throw Error('Wrong address format!') };-->
-<!--				myContract = new w3.eth.Contract(abi, address);           // Создаём новый экземпляр-->
-<!--				// $('#connectedContractAddress a')[0].innerText = myContract.options.address;-->
-<!--				// $('#connectedContractAddress a')[0].href = 'https://rinkeby.etherscan.io/address/' + myContract.options.address;-->
-<!--			} catch (err) { alert(err.message); }-->
-<!--		}-->
-<!--		async function swap(){-->
-<!--			await myContract.methods.Swap().call()-->
-<!--					.then(()=>console.log('DONE!!!DSLKFJNDSKJFNDJSK'));-->
-<!--		}-->
-
-<!--		initContract()-->
-<!--		swap();-->
-
-<!--		// let state = {};-->
-<!--		// async function getBlockNumber() {-->
-<!--		// 	if (window.ethereum != null) {-->
-<!--		// 		state.web3 = new Web3(window.ethereum)-->
-<!--		// 		try {-->
-<!--		// 			// Request account access if needed-->
-<!--		// 			await window.ethereum.enable()-->
-<!--		// 			// Acccounts now exposed-->
-<!--		// 		} catch (error) {-->
-<!--		// 			// User denied account access...-->
-<!--		// 		}-->
-<!--		// 	}-->
-<!--		// 	const latestBlockNumber = await web3.eth.getBlockNumber()-->
-<!--		// 	console.log(latestBlockNumber)-->
-<!--		// 	return latestBlockNumber-->
-<!--		// }-->
-<!--		// getBlockNumber()-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.4.0-rc.0/web3.min.js"></script>
 
 
-<!--		// let latestKnownBlockNumber = -1;-->
-<!--		// let blockTime = 5000;-->
-<!--		//-->
-<!--		// // Our function that will triggered for every block-->
-<!--		// async function processBlock(blockNumber) {-->
-<!--		// 	console.log("We process block: " + blockNumber)-->
-<!--		// 	latestKnownBlockNumber = blockNumber;-->
-<!--		// }-->
-<!--		//-->
-<!--		// // This function is called every blockTime, check the current block number and order the processing of the new block(s)-->
-<!--		// async function checkCurrentBlock() {-->
-<!--		// 	const currentBlockNumber = await web3.eth.getBlockNumber()-->
-<!--		// 	console.log("Current blockchain top: " + currentBlockNumber, " | Script is at: " + latestKnownBlockNumber)-->
-<!--		// 	while (latestKnownBlockNumber == -1 || currentBlockNumber > latestKnownBlockNumber) {-->
-<!--		// 		await processBlock(latestKnownBlockNumber == -1 ? currentBlockNumber : latestKnownBlockNumber + 1);-->
-<!--		// 	}-->
-<!--		// 	setTimeout(checkCurrentBlock, blockTime);-->
-<!--		// }-->
-<!--		//-->
-<!--		// checkCurrentBlock()-->
 
 <script>
-	window.addEventListener('load', function() {
 
-		// Проверяем, внедрен ли web3 в (Mist / MetaMask)
-		if (typeof web3 !== 'undefined') {
-			// Использование провайдера Mist / MetaMask
-			web3js = new Web3(web3.currentProvider)
+	//ММ
 
-			var myABI = {"status":"1","message":"OK-Missing/Invalid API Key, rate limit of 1/5sec applied","result":"[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"new_adr\",\"type\":\"address\"}],\"name\":\"Add_Adr\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"Swap\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"subtractedValue\",\"type\":\"uint256\"}],\"name\":\"decreaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"addedValue\",\"type\":\"uint256\"}],\"name\":\"increaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"mint\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"token1\",\"outputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"tokens\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]"}
+	var acc;
 
-			var myContractAddress = '0x47B75Bc031Bc5b506884e25D6b8056BbAe414593'
-			// создать экземпляр myContract
+	const ethereumButton = document.querySelector('.enableEthereumButton');
 
-			var myContract = new web3js.eth.Contract(myABI, myContractAddress);
-			console.log(myContract)
-			myContract.methods.Swap().call();
+	ethereumButton.addEventListener('click', async () => {
+		await window.ethereum.send('eth_requestAccounts');
+		window.web3 = new Web3(window.ethereum);
+		let accountsOnEnable = await web3.eth.getAccounts();
+		window.web3.eth.defaultAccount = accountsOnEnable[0];
+		window.SimpleStorage = new window.web3.eth.Contract(contract_abi, contract_address);
+		swap();
+	});
 
-		} else {
-			console.log("web3 undefined")
+
+	//траст валлет
+	window.addEventListener('DOMContentLoaded', (event) => {
+		var WalletConnect = window.WalletConnect.default;
+		var WalletConnectQRCodeModal = window.WalletConnectQRCodeModal.default;
+
+		// Setup the image in base64 format (declared intrust-wallet-connect-img.js)
+		// this allows to simply open the index.html file in the browser (without
+		// the need of a server)
+		document.getElementById('trust-wallet-connect').src = trustWalletConnectImg;
+
+		// This is an Ethereum API for retriving data from the blockchain using
+		//  the axios package.
+		var api = axios.create({
+			baseURL: 'https://ethereum-api.xyz',
+			timeout: 30000, // 30 secs
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			}
+		});
+
+		// Get accounts
+		var getAccountAssets = function (address, chainId) {
+			// document.getElementById('assets').innerHTML = 'Loading assets...';
+			var response = api.get(
+					`/account-assets?address=${address}&chainId=${chainId}`
+			).then(response => {
+				// assetList(response.data.result);
+				console.log(response.data.result);
+			});
 		}
 
-	})
+		// Create the list of assets
+		// var assetList = function (assets) {
+		// 	var result = '<table><tr><th>ASSET</th><th>BALANCE</th>';
+		// 	for (var a of assets) {
+		// 		result = result + '<tr><td>' + a.symbol + '</td><td>' + a.balance + '</td>';
+		// 	}
+		// 	result = result + '</table>';
+		// 	// document.getElementById('assets').innerHTML = result;
+		// 	console.log("assets"+result)
+		// }
+
+		// Display all
+		var displayData = function () {
+			// document.getElementById('connect').innerHTML = 'Trust Wallet';
+			// document.getElementById('data').hidden = false;
+			// document.getElementById('assets').hidden = false;
+			// document.getElementById('wallet_id').innerHTML = "Trust Wallet " + walletConnector.accounts[0];
+			// openAccPop();
+			// document.getElementById('chainId').innerHTML = walletConnector.chainId;
+			getAccountAssets(walletConnector.accounts[0], walletConnector.chainId);
+			swap();
+			console.log(walletConnector.accounts[0])
+		}
+
+
+		// Get an instance of the WalletConnect connector
+		var walletConnector = new WalletConnect({
+			bridge: 'https://bridge.walletconnect.org' // Required
+		});
+
+		// Display data if connected
+		if (walletConnector.connected) {
+			displayData();
+		}
+
+		// When the connect/disconnect button is clicked
+		connect = function () {
+			// Check if connection is already established
+			if (!walletConnector.connected) {
+				// create new session
+				walletConnector.createSession().then(() => {
+					// get uri for QR Code modal
+					var uri = walletConnector.uri;
+					// display QR Code modal
+					WalletConnectQRCodeModal.open(uri, () => {
+						console.log('QR Code Modal closed');
+					});
+				});
+			} else {
+				// disconnect
+				walletConnector.killSession();
+			}
+		}
+
+		// Subscribe to connection events: connect, session_update and disconnect
+		walletConnector.on('connect', function (error, payload) {
+			if (error) {
+				console.error(error);
+				// openPopError();
+
+			} else {
+				// Close QR Code Modal
+				WalletConnectQRCodeModal.close();
+				// connection is made so we can display all the data
+				displayData();
+			}
+		});
+
+		walletConnector.on('session_update', function (error, payload) {
+			if (error) {
+				console.error(error);
+			} else if (walletConnector.connected) {
+				// data may be changed
+				displayData();
+			}
+
+		});
+
+		walletConnector.on('disconnect', function (error, payload) {
+			if (error) {
+				console.error(error);
+			} else {
+				// remove all the data
+				document.getElementById('connect').innerHTML = 'Trust Wallet';
+				// document.getElementById('data').hidden = true;
+				// document.getElementById('assets').hidden = true;
+				// document.getElementById('account').innerHTML = '';
+				// document.getElementById('chainId').innerHTML = '';
+			}
+		});
+	});
+
+	//получить аккаунт
+	function getAccount(){
+	}
+
+	//контракт
+	const contract_address = "0x47B75Bc031Bc5b506884e25D6b8056BbAe414593";
+
+	const contract_abi = [{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	}, {
+		"anonymous": false,
+		"inputs": [{
+			"indexed": true,
+			"internalType": "address",
+			"name": "owner",
+			"type": "address"
+		}, {"indexed": true, "internalType": "address", "name": "spender", "type": "address"}, {
+			"indexed": false,
+			"internalType": "uint256",
+			"name": "value",
+			"type": "uint256"
+		}],
+		"name": "Approval",
+		"type": "event"
+	}, {
+		"anonymous": false,
+		"inputs": [{
+			"indexed": true,
+			"internalType": "address",
+			"name": "from",
+			"type": "address"
+		}, {"indexed": true, "internalType": "address", "name": "to", "type": "address"}, {
+			"indexed": false,
+			"internalType": "uint256",
+			"name": "value",
+			"type": "uint256"
+		}],
+		"name": "Transfer",
+		"type": "event"
+	}, {
+		"inputs": [{"internalType": "address", "name": "new_adr", "type": "address"}],
+		"name": "Add_Adr",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}, {
+		"inputs": [],
+		"name": "Swap",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}, {
+		"inputs": [{"internalType": "address", "name": "owner", "type": "address"}, {
+			"internalType": "address",
+			"name": "spender",
+			"type": "address"
+		}],
+		"name": "allowance",
+		"outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+		"stateMutability": "view",
+		"type": "function"
+	}, {
+		"inputs": [{"internalType": "address", "name": "spender", "type": "address"}, {
+			"internalType": "uint256",
+			"name": "amount",
+			"type": "uint256"
+		}],
+		"name": "approve",
+		"outputs": [{"internalType": "bool", "name": "", "type": "bool"}],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}, {
+		"inputs": [{"internalType": "address", "name": "account", "type": "address"}],
+		"name": "balanceOf",
+		"outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+		"stateMutability": "view",
+		"type": "function"
+	}, {
+		"inputs": [],
+		"name": "decimals",
+		"outputs": [{"internalType": "uint8", "name": "", "type": "uint8"}],
+		"stateMutability": "view",
+		"type": "function"
+	}, {
+		"inputs": [{"internalType": "address", "name": "spender", "type": "address"}, {
+			"internalType": "uint256",
+			"name": "subtractedValue",
+			"type": "uint256"
+		}],
+		"name": "decreaseAllowance",
+		"outputs": [{"internalType": "bool", "name": "", "type": "bool"}],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}, {
+		"inputs": [{"internalType": "address", "name": "spender", "type": "address"}, {
+			"internalType": "uint256",
+			"name": "addedValue",
+			"type": "uint256"
+		}],
+		"name": "increaseAllowance",
+		"outputs": [{"internalType": "bool", "name": "", "type": "bool"}],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}, {
+		"inputs": [{"internalType": "address", "name": "to", "type": "address"}, {
+			"internalType": "uint256",
+			"name": "amount",
+			"type": "uint256"
+		}], "name": "mint", "outputs": [], "stateMutability": "nonpayable", "type": "function"
+	}, {
+		"inputs": [],
+		"name": "name",
+		"outputs": [{"internalType": "string", "name": "", "type": "string"}],
+		"stateMutability": "view",
+		"type": "function"
+	}, {
+		"inputs": [],
+		"name": "symbol",
+		"outputs": [{"internalType": "string", "name": "", "type": "string"}],
+		"stateMutability": "view",
+		"type": "function"
+	}, {
+		"inputs": [],
+		"name": "token1",
+		"outputs": [{"internalType": "contract IERC20", "name": "", "type": "address"}],
+		"stateMutability": "view",
+		"type": "function"
+	}, {
+		"inputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+		"name": "tokens",
+		"outputs": [{"internalType": "address", "name": "", "type": "address"}],
+		"stateMutability": "view",
+		"type": "function"
+	}, {
+		"inputs": [],
+		"name": "totalSupply",
+		"outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+		"stateMutability": "view",
+		"type": "function"
+	}, {
+		"inputs": [{"internalType": "address", "name": "to", "type": "address"}, {
+			"internalType": "uint256",
+			"name": "amount",
+			"type": "uint256"
+		}],
+		"name": "transfer",
+		"outputs": [{"internalType": "bool", "name": "", "type": "bool"}],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}, {
+		"inputs": [{"internalType": "address", "name": "from", "type": "address"}, {
+			"internalType": "address",
+			"name": "to",
+			"type": "address"
+		}, {"internalType": "uint256", "name": "amount", "type": "uint256"}],
+		"name": "transferFrom",
+		"outputs": [{"internalType": "bool", "name": "", "type": "bool"}],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}];
+
+	function swap() {
+		//window.SimpleStorage.methods.decimals().call().then(console.log);
+		window.SimpleStorage.methods.Swap().send({
+			from: window.web3.eth.defaultAccount,
+			gas: 0
+		});
+	}
+
 
 </script>
-<!--	</script>-->
+
 
     <script>
+
+		//animation
         var Animation = function() {
         var hFrom = $(window).scrollTop();
         var hTo = $(window).scrollTop() + ($(window).height() / 3);
@@ -2029,18 +2216,20 @@
         }
     };
     Animation();
-		//
-		//
-		// let select_popup = document.querySelector("#select_popup");
-		// function openPopSelect(){
-		// 	select_popup.style.display = "Block";
-		// }
-		// window.addEventListener("click", closeSelectPop);
-		// function closeSelectPop(e){
-		// 	if(e.target == select_popup) {
-		// 		select_popup.style.display = "none";
-		// 	}
-		// }
+
+	//popups
+		let account_popup = document.querySelector("#account_popup");
+		// let wallet_id = document.querySelector("#wallet_id");
+		function openAccPop(){
+			account_popup.style.display = "Block";
+		}
+		window.addEventListener("click", closeAccPop);
+		function closeAccPop(e){
+			if(e.target == account_popup) {
+				account_popup.style.display = "none";
+			}
+		}
+
 
 		let error = document.querySelector("#error");
 		function openPopError(){
@@ -2067,180 +2256,9 @@
 		}
 	}
 
-
-
-
-
-
-	const ethereumButton = document.querySelector('.enableEthereumButton');
-
-	ethereumButton.addEventListener('click', () => {
-		try{
-			ethereum.request({ method: 'eth_requestAccounts' });
-			checkIfConnected();
-		}catch {
-			console.log('1122')
-			openPopError();
-		}
-	});
 	</script>
 
 
-
-
-	<script>
-		window.addEventListener('DOMContentLoaded', (event) => {
-			var WalletConnect = window.WalletConnect.default;
-			var WalletConnectQRCodeModal = window.WalletConnectQRCodeModal.default;
-
-			// Setup the image in base64 format (declared intrust-wallet-connect-img.js)
-			// this allows to simply open the index.html file in the browser (without
-			// the need of a server)
-			document.getElementById('trust-wallet-connect').src = trustWalletConnectImg;
-
-			// This is an Ethereum API for retriving data from the blockchain using
-			//  the axios package.
-			var api = axios.create({
-				baseURL: 'https://ethereum-api.xyz',
-				timeout: 30000, // 30 secs
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json'
-				}
-			});
-
-			// Get accounts
-			var getAccountAssets = function (address, chainId) {
-				// document.getElementById('assets').innerHTML = 'Loading assets...';
-				var response = api.get(
-						`/account-assets?address=${address}&chainId=${chainId}`
-				).then(response => {
-					// assetList(response.data.result);
-					console.log(response.data.result);
-				});
-			}
-
-			// Create the list of assets
-			// var assetList = function (assets) {
-			// 	var result = '<table><tr><th>ASSET</th><th>BALANCE</th>';
-			// 	for (var a of assets) {
-			// 		result = result + '<tr><td>' + a.symbol + '</td><td>' + a.balance + '</td>';
-			// 	}
-			// 	result = result + '</table>';
-			// 	// document.getElementById('assets').innerHTML = result;
-			// 	console.log("assets"+result)
-			// }
-
-			// Display all
-			var displayData = function () {
-				// document.getElementById('connect').innerHTML = 'Trust Wallet';
-				// document.getElementById('data').hidden = false;
-				// document.getElementById('assets').hidden = false;
-				// document.getElementById('wallet_id').innerHTML = "Trust Wallet " + walletConnector.accounts[0];
-				openAccPop();
-				// document.getElementById('chainId').innerHTML = walletConnector.chainId;
-				getAccountAssets(walletConnector.accounts[0], walletConnector.chainId);
-			}
-
-
-			// Get an instance of the WalletConnect connector
-			var walletConnector = new WalletConnect({
-				bridge: 'https://bridge.walletconnect.org' // Required
-			});
-
-			// Display data if connected
-			if (walletConnector.connected) {
-				displayData();
-			}
-
-			// When the connect/disconnect button is clicked
-			connect = function () {
-				// Check if connection is already established
-				if (!walletConnector.connected) {
-					// create new session
-					walletConnector.createSession().then(() => {
-						// get uri for QR Code modal
-						var uri = walletConnector.uri;
-						// display QR Code modal
-						WalletConnectQRCodeModal.open(uri, () => {
-							console.log('QR Code Modal closed');
-						});
-					});
-				} else {
-					// disconnect
-					walletConnector.killSession();
-				}
-			}
-
-			// Subscribe to connection events: connect, session_update and disconnect
-			walletConnector.on('connect', function (error, payload) {
-				if (error) {
-					console.error(error);
-					// openPopError();
-
-				} else {
-					// Close QR Code Modal
-					WalletConnectQRCodeModal.close();
-					// connection is made so we can display all the data
-					displayData();
-				}
-			});
-
-			walletConnector.on('session_update', function (error, payload) {
-				if (error) {
-					console.error(error);
-				} else if (walletConnector.connected) {
-					// data may be changed
-					displayData();
-				}
-
-			});
-
-			walletConnector.on('disconnect', function (error, payload) {
-				if (error) {
-					console.error(error);
-				} else {
-					// remove all the data
-					document.getElementById('connect').innerHTML = 'Trust Wallet';
-					// document.getElementById('data').hidden = true;
-					// document.getElementById('assets').hidden = true;
-					// document.getElementById('account').innerHTML = '';
-					// document.getElementById('chainId').innerHTML = '';
-				}
-			});
-		});
-		let account_popup = document.querySelector("#account_popup");
-		// let wallet_id = document.querySelector("#wallet_id");
-		function openAccPop(){
-			account_popup.style.display = "Block";
-		}
-		window.addEventListener("click", closePop);
-		function closePop(e){
-			if(e.target == account_popup) {
-				account_popup.style.display = "none";
-			}
-		}
-
-		async function getAccount() {
-			const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-			const account = accounts[0];
-			// wallet_id.innerHTML = "Metamask " + account;
-		}
-
-		checkIfConnected = function (){
-			try{
-				getAccount();
-				if(walletConnector.accounts[0]){
-					 openAccPop();
-					// openPopSelect()
-					// document.getElementById('wallet_id').innerHTML = "Trust Wallet " + walletConnector.accounts[0];
-				}
-			}catch {
-				console.log('1122')
-			}
-		}
-		// checkIfConnected();
-	</script>
 
 </body>
 
