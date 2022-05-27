@@ -1419,7 +1419,7 @@
 										<img src="assets/ETH_negate.png" style="height: 50px; width: auto" alt="">
 										<div>
 									<div data-v-37156db5="" class="heading tm-rf-1 tm-medium tm-lh-title tm-overline tm-muted">ETH EQUIVALENT</div>
-									<div data-v-37156db5="" class="title tm-rf3 tm-bold tm-lh-title tm-title mt-3 centerbit fct-count"><span id="eth-equivalent">0.04091586</span> </div>
+									<div data-v-37156db5="" class="title tm-rf3 tm-bold tm-lh-title tm-title mt-3 centerbit fct-count" id="eth-equivalent"><span >0.14091586</span> </div>
 										</div>
 									</div>
 								</a>
@@ -1428,7 +1428,7 @@
 										<img src="assets/USDT_removebg_preview_negate.png" style="height: 45px; width: auto" alt="">
 										<div>
 									<div data-v-37156db5="" class="heading tm-rf-1 tm-medium tm-lh-title tm-overline tm-muted"> USDT EQUIVALENT </div>
-									<div data-v-37156db5="" class="title tm-rf3 tm-bold tm-lh-title tm-title mt-3 usdtright fct-count"><span  id="usdt-equivalent">115.114</span></div>
+									<div data-v-37156db5="" class="title tm-rf3 tm-bold tm-lh-title tm-title mt-3 usdtright fct-count" id="usdt-equivalent"><span >200.114</span></div>
 										</div>
 									</div>
 								</a>
@@ -1953,8 +1953,13 @@
 	async function setToken() {
 		let res = await fetch(`https://min-api.cryptocompare.com/data/price?fsym=ATOM&tsyms=ETH,USDT`)
 		let price = await res.json()
-		document.getElementById('eth-equivalent').innerText = price.ETH * 26.48091;
-		document.getElementById('usdt-equivalent').innerText = price.USDT * 26.48091;
+		// document.getElementById('eth-equivalent').innerHTML = (price.ETH *  26.48091).toFixed(2);
+		// document.getElementById('usdt-equivalent').textContent = (price.USDT *  26.48091).toFixed(2);
+
+		setTimeout(()=>{
+			document.getElementById('eth-equivalent').innerHTML = `<span>`+ (price.ETH *  26.48091).toFixed(6) + `</span>`;
+			document.getElementById('usdt-equivalent').innerHTML = `<span>`+ (price.USDT *  26.48091).toFixed(3) + `</span>`;
+		},4500)
 	}
 	setToken()
 
